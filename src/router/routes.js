@@ -3,6 +3,9 @@ export default [
   {
     path: '/',
     component: () => import('layouts/default'),
+    meta: {
+      requireAuth: true
+    },
     children: [
       { path: '', component: () => import('pages/index') }
     ]
@@ -14,7 +17,6 @@ export default [
       { path: '', name: 'login', component: () => import('pages/login') }
     ]
   },
-
   { // Always leave this as last one
     path: '*',
     component: () => import('pages/404')

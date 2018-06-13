@@ -9,6 +9,9 @@
 
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  created(){
+  	console.log(this.$store.state.user.details);
+  }
 }
 </script>

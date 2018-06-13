@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import routes from './routes'
+import store from '../store/index'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,29 @@ const Router = new VueRouter({
   base: process.env.VUE_ROUTER_BASE,
   scrollBehavior: () => ({ y: 0 }),
   routes
+})
+
+Router.beforeEach((to, from, next) => {
+  let logUser = {};
+  let token = store.state.user.token;
+  if(to.path == "/login" && token != null){
+    next({
+      path: '/',
+    })
+  }
+  else{
+    if(to.matched.length > 0 && to.matched[0].meta.requireAuth){
+      if(token) {
+        next()
+      } else {
+        next({
+          path: '/login',
+        })
+      }
+    } else {
+      next()
+    }
+  }
 })
 
 export default Router

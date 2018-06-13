@@ -38,14 +38,17 @@ export default {
       formData.append('email', this.loginForm.email);
       formData.append('password', this.loginForm.password);
       this.$q.loading.show({
-        spinner: 'QSpinnerInfinity',
+        spinner: 'QSpinnerOval',
         messageColor: 'primary',
         spinnerSize: 250,
         spinnerColor: 'primary',
       });
       this.$api.post('login',formData)
       .then((response) => {
-        console.log(response.data.details);
+        let data = response.data.details;
+        this.$store.commit('user/setLoginUser',data);
+        setAuthorizationToken(data.token);
+        this.$router.push('/');
         this.$q.loading.hide();
       })
       .catch((error) => {

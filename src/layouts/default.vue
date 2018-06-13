@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-layout-header class="no-shadow">
       <q-toolbar color="primary">
-        <!-- <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu"><q-icon name="menu" /></q-btn> -->
+        <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu"><q-icon name="menu" /></q-btn>
         <q-btn flat label="inventory" aria-label="Menu" class="toolbar-btns"/>
         <q-btn flat label="purchasing" aria-label="Menu" class="toolbar-btns"/>
         <q-toolbar-title></q-toolbar-title>
