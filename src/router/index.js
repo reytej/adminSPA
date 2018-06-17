@@ -30,10 +30,24 @@ Router.beforeEach((to, from, next) => {
       path: '/',
     })
   }
-  else{
+  else{    
     if(to.matched.length > 0 && to.matched[0].meta.requireAuth){
       if(token) {
-        next()
+        let links = store.state.configs.links;
+        if(Object.keys(links).length === 0 && to.path != "/boot"){
+          next({
+            path: '/boot',
+          })
+        } 
+        else{
+          if(Object.keys(links).length > 0 && to.path == "/boot"){
+            next({
+              path: store.state.user.defaultUrl,
+            })
+          }
+          else
+            next();
+        }     
       } else {
         next({
           path: '/login',
@@ -41,7 +55,7 @@ Router.beforeEach((to, from, next) => {
       }
     } else {
       next()
-    }
+    }    
   }
 })
 

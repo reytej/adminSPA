@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    
+  	items
   </q-page>
 </template>
 
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'PageIndex',
+  name: 'PageItems',
   created(){
   	// console.log(this.$store.state.user.details);
   }

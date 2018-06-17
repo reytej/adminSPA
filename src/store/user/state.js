@@ -1,5 +1,6 @@
 export default {
   token: null,
   details: {},
-  last: 0
+  last: 0,
+  defaultUrl: ''
 }

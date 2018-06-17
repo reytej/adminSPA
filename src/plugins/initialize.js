@@ -2,19 +2,22 @@ import { date } from 'quasar'
 import { setAuthorizationToken } from './axios'
 
 export default ({ app, router, Vue, store }) => {
-  // let c8user = {};
-  // if(localStorage.getItem('c8user')){
-  //   c8user = JSON.parse(localStorage.getItem('c8user'));
-  // }
-  // if (c8user.hasOwnProperty('token')) { 
-  //   let now = Date.now();
-  //   let days = date.getDateDiff(now,c8user.last,'days');
-  //   if(days == 0){
-  //     store.state.user.user = c8user.user;
-  //     store.state.user.db = c8user.db;
-  //     store.state.user.token = c8user.token;
-  //     store.state.user.last = c8user.last;
-  //     setAuthorizationToken(c8user.token);
-  //   }
-  // }
+  let adminSTR = {};
+  // localStorage.clear();
+  if(localStorage.getItem('adminSTR')){
+    adminSTR = JSON.parse(localStorage.getItem('adminSTR'));
+  }
+  if (adminSTR.hasOwnProperty('token')) { 
+    let now = Date.now();
+    let days = date.getDateDiff(now,adminSTR.last,'days');
+    if(days == 0){
+      setAuthorizationToken(adminSTR.token);
+      store.state.user.details = adminSTR.user;
+      store.state.user.token = adminSTR.token;
+      store.state.user.last = adminSTR.last;
+      store.state.user.defaultUrl = adminSTR.defaultUrl;
+      if(adminSTR.hasOwnProperty('links'))
+        store.state.configs.links = adminSTR.links;
+    }
+  }
 }

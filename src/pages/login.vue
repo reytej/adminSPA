@@ -48,7 +48,7 @@ export default {
         let data = response.data.details;
         this.$store.commit('user/setLoginUser',data);
         setAuthorizationToken(data.token);
-        this.$router.push('/');
+        this.$router.push(data.defaultUrl);
         this.$q.loading.hide();
       })
       .catch((error) => {

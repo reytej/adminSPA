@@ -5,6 +5,7 @@ module.exports = function (ctx) {
     // app plugins (/src/plugins)
     plugins: [
       'axios',
+      'initialize',
     ],
     css: [
       'app.styl'
@@ -67,6 +68,7 @@ module.exports = function (ctx) {
         'QTabPane',
         'QDialog',
         'QInnerLoading',
+        'QSpinner',
         'QSpinnerOval',
         'QCollapsible',
         'QDatetime'
