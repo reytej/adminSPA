@@ -25,10 +25,35 @@ export default [
     component: () => import('layouts/default'),
     meta: {
       requireAuth: true,
+      page: 'INV00',
       code: 'INV00',
     },
     children: [
       { path: '', component: () => import('pages/inventory/items') }
+    ]
+  },
+  {
+    path: '/purchase',
+    component: () => import('layouts/default'),
+    meta: {
+      requireAuth: true,
+      page: 'INV00',
+      code: 'INV01',
+    },
+    children: [
+      { path: '', component: () => import('pages/inventory/purchase') }
+    ]
+  },
+  {
+    path: '/sales',
+    component: () => import('layouts/default'),
+    meta: {
+      requireAuth: true,
+      page: 'SLE00',
+      code: 'SLE00',
+    },
+    children: [
+      { path: '', component: () => import('pages/sales/transactions') }
     ]
   },
   {

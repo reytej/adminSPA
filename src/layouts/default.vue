@@ -16,7 +16,7 @@
         </q-btn>
       </q-toolbar>
     </q-layout-header>
-    <q-layout-drawer v-model="leftDrawerOpen" color="mainBG" inverted  content-class="no-shadow sidebar">
+    <q-layout-drawer v-model="leftDrawerOpen" color="secondBG" inverted  content-class="no-shadow sidebar">
       <div class="logo">ADMIN</div>
       <q-list no-border link inset-delimiter class="sidebar-list">
         <q-item  v-for="(link,key) in sideLinks" :key="key" @click.native="goTo(link.url)" > 
@@ -44,14 +44,22 @@ export default {
     }
   },
   mounted(){
-    if(this.$router.currentRoute.matched[0].meta.code){
-      this.page = this.$router.currentRoute.matched[0].meta.code; 
-    }
-    if(this.links.hasOwnProperty(this.page)){
-      this.sideLinks = this.links[this.page].children;
+    this.setLinks();
+  },
+  watch:{
+    '$route' : function(){
+      this.setLinks();
     }
   },
   methods:{
+    setLinks(){
+      if(this.$router.currentRoute.matched[0].meta.code){
+        this.page = this.$router.currentRoute.matched[0].meta.code; 
+      }
+      if(this.links.hasOwnProperty(this.page)){
+        this.sideLinks = this.links[this.page].children;
+      }
+    },
     goTo(path){
       this.$router.push(path); 
     },

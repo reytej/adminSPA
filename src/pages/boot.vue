@@ -15,6 +15,7 @@ export default {
     .then((response) => {
       let data = response.data.details;
       this.$store.commit('configs/setConfigs',data);
+      this.$router.go(this.$store.state.user.defaultUrl);
     })
     .catch((error) => {
       this.$q.notify({

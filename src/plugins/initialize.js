@@ -20,4 +20,11 @@ export default ({ app, router, Vue, store }) => {
         store.state.configs.links = adminSTR.links;
     }
   }
+  else{
+    store.state.user.details = {};
+    store.state.user.token = null;
+    store.state.user.last = 0;
+    store.state.user.defaultUrl = '';
+    store.state.configs.links = [];
+  }
 }
