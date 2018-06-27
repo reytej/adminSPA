@@ -1,8 +1,11 @@
+import store from '../index'
+
 export const setLoginUser = (state, data) => {
 	state.token = data.token;
 	state.details = data.user;
 	state.defaultUrl = data.defaultUrl;
 	state.last = Date.now();
+	localStorage.clear();
 	localStorage.setItem('adminSTR', JSON.stringify({'user':state.details,'token':state.token, 'last':state.last,'defaultUrl':state.defaultUrl}));
 }
 export const goLogout = (state, token) => {
@@ -10,5 +13,6 @@ export const goLogout = (state, token) => {
 	state.db = null;
 	state.token = null;
 	state.last = 0;
+	store.state.configs.links = [];
 	localStorage.clear();
 }

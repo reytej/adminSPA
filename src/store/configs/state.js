@@ -1,3 +1,4 @@
 export default {
-  links: []
+  links: [],
+  appRoutes: []
 }

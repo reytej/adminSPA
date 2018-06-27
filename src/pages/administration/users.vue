@@ -6,11 +6,26 @@
   			<span>{{pageName}}</span>
   		</div>
   		<div class="tools pull-right">
-  			tools
+  			
   		</div>
   	</div>
   </q-page>
 </template>
+
+<script>
+export default {
+  name: 'PageUsers',
+  data () {
+    return {
+      pageIcon : this.$router.currentRoute.meta.icon,
+      pageName : this.$router.currentRoute.name,
+    }
+  },
+  mounted(){
+  	// console.log(this.$store.state.user.details);
+  }
+}
+</script>
 
 <style  lang="stylus">
 @import '~variables'
@@ -41,18 +56,3 @@
 	margin: 0
 	float:right 
 </style>
-
-<script>
-export default {
-  name: 'PageItems',
-  data () {
-    return {
-      pageIcon : 'fa fa-archive',
-      pageName : 'Items',
-    }
-  },
-  mounted(){
-  	// console.log(this.$store.state.user.details);
-  }
-}
-</script>

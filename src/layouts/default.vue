@@ -2,8 +2,8 @@
   <q-layout view="lHh Lpr lFf">
     <q-layout-header class="no-shadow">
       <q-toolbar color="primary">
-        <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu"><q-icon name="menu" /></q-btn>
-        <q-btn v-for="(link,key) in links" :key="key" @click.native="goTo(link.url)" flat :label="link.name" :aria-label="link.name" class="toolbar-btns"/>
+        <q-btn flat dense round @click="sidebarDraw()" aria-label="Menu"><q-icon :name="drawerIcon" /></q-btn>
+        <q-btn v-for="(link,key) in links" :key="key" @click.native="goTo(link.path)" flat :label="link.name" :aria-label="link.name" class="toolbar-btns"/>
         <q-toolbar-title></q-toolbar-title>
         <q-btn flat dense round aria-label="Menu" class="toolbar-btns">
           <q-icon name="fa fa-cogs" />
@@ -19,8 +19,8 @@
     <q-layout-drawer v-model="leftDrawerOpen" color="secondBG" inverted  content-class="no-shadow sidebar">
       <div class="logo">ADMIN</div>
       <q-list no-border link inset-delimiter class="sidebar-list">
-        <q-item  v-for="(link,key) in sideLinks" :key="key" @click.native="goTo(link.url)" > 
-          <q-item-side :icon="link.icon" color="primary"/>
+        <q-item  v-for="(link,key) in sideLinks" :key="key" @click.native="goTo(link.path)" > 
+          <q-item-side :icon="link.meta.icon" color="primary"/>
           <q-item-main :label="link.name"/>
         </q-item>
       </q-list>
@@ -39,8 +39,9 @@ export default {
     return {
       page : '',
       sideLinks : {},
-      links : this.$store.state.configs.links,
-      leftDrawerOpen: this.$q.platform.is.desktop
+      links : [],
+      leftDrawerOpen: this.$q.platform.is.desktop,
+      drawerIcon: 'fa fa-chevron-left',
     }
   },
   mounted(){
@@ -52,13 +53,31 @@ export default {
     }
   },
   methods:{
+    sidebarDraw(){
+      this.leftDrawerOpen = !this.leftDrawerOpen;
+      if(this.leftDrawerOpen)
+        this.drawerIcon = 'fa fa-chevron-left';
+      else
+        this.drawerIcon = 'fa fa-chevron-right';
+    },
     setLinks(){
-      if(this.$router.currentRoute.matched[0].meta.code){
-        this.page = this.$router.currentRoute.matched[0].meta.code; 
+      let mainRoutes = this.$router.options.routes[0].children;
+      let currRoute = this.$router.currentRoute;
+      let mainLinks = [];
+      let subLinks = [];
+      for (let i = mainRoutes.length - 1; i >= 0; i--) {
+        let mnr = mainRoutes[i];
+        if(mnr.hasOwnProperty('meta')){
+          if(mnr.meta.type == 'main'){
+            mainLinks.push(mnr);
+          }
+          if(currRoute.meta.parent == mnr.meta.parent && mnr.meta.type == 'sub'){
+            subLinks.push(mnr);
+          }
+        }
       }
-      if(this.links.hasOwnProperty(this.page)){
-        this.sideLinks = this.links[this.page].children;
-      }
+      this.links = mainLinks; 
+      this.sideLinks = subLinks; 
     },
     goTo(path){
       this.$router.push(path); 
