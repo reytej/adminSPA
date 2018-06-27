@@ -11,37 +11,6 @@
   	</div>
   </q-page>
 </template>
-
-<style  lang="stylus">
-@import '~variables'
-.page-bar
-	position: relative
-	background-color:#fff
-	width : 100%
-	height : 50px
-	padding-top : 13px
-	padding-left : 10px
-	padding-right : 10px
-.page-bar .title
-	position: relative
-	display: inline-block
-	width: auto;
-	max-width: 150px
-	margin: 0 
-	font-weight : 500
-	font-size : 18px
-.page-bar .title .q-icon
-	display: inline-block
-	font-size: 24px
-	margin-right : 5px
-.page-bar .tools
-	display: inline-block
-	width: auto;
-	max-width: 150px
-	margin: 0
-	float:right 
-</style>
-
 <script>
 export default {
   name: 'PageItems',
