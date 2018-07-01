@@ -72,7 +72,8 @@ module.exports = function (ctx) {
         'QSpinnerOval',
         'QCollapsible',
         'QDatetime',
-        'QModal'
+        'QModal',
+        'QModalLayout'
       ],
       directives: [
         'Ripple',

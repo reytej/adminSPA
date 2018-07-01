@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import user from './user'
 import configs from './configs'
+import helpers from './helpers'
 
 Vue.use(Vuex)
 
@@ -10,6 +11,7 @@ const store = new Vuex.Store({
   modules: {
     user,
     configs,
+    helpers,
   }
 })
 

@@ -18,6 +18,8 @@ export default ({ app, router, Vue, store }) => {
       store.state.user.defaultUrl = adminSTR.defaultUrl;
       if(adminSTR.hasOwnProperty('links'))
         store.state.configs.links = adminSTR.links;
+      if(adminSTR.hasOwnProperty('helpers'))
+        store.state.helpers = adminSTR.helpers;
     }
   }
   else{

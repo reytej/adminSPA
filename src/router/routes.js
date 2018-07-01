@@ -19,7 +19,7 @@ export default [
       { name:'Purchase', path: 'purchase', component: () => import('pages/inventory/purchase'), meta:{type:'sub', parent:'INV00', code:'INV02', icon:'fa fa-truck'} },
       // SALES ROUTE
       { name:'Sales', path: 'sales', component: () => import('pages/sales/transactions'), meta:{type:'main', parent:'SLE00', code:'SLE00'} },
-      { name:'Sales', path: 'sales', component: () => import('pages/sales/transactions'), meta:{type:'sub', parent:'SLE00', code:'SLE01', icon:'fa fa-table'} },
+      { name:'Tramsactions', path: 'sales', component: () => import('pages/sales/transactions'), meta:{type:'sub', parent:'SLE00', code:'SLE01', icon:'fa fa-table'} },
     ]
   },
   {
