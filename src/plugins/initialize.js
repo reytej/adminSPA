@@ -29,4 +29,23 @@ export default ({ app, router, Vue, store }) => {
     store.state.user.defaultUrl = '';
     store.state.configs.links = [];
   }
+  // set defaults
+  let noty = {
+    success   : {
+                  message : '',
+                  color   : 'positive',
+                  position: 'top-right',
+                  icon    : 'check',
+                  actions : [{icon: 'fa fa-times',handler: () => {return}}]
+                }, 
+    negative  : {
+                  message : '',
+                  color   : 'negative',
+                  position: 'top-right',
+                  icon    : 'warning',
+                  actions : [{icon: 'report_problem',handler: () => {return}}]
+                } 
+  }
+  Vue.prototype.$noty = noty;
+
 }
