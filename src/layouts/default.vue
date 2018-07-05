@@ -19,7 +19,7 @@
     <q-layout-drawer v-model="leftDrawerOpen" color="secondBG" inverted  content-class="no-shadow sidebar">
       <div class="logo">ADMIN</div>
       <q-list no-border link inset-delimiter class="sidebar-list">
-        <q-item  v-for="(link,key) in sideLinks" :key="key" @click.native="goTo(link.path)" > 
+        <q-item  v-for="(link,key) in sideLinks" :key="key" @click.native="goTo(link.path)" v-if="!link.meta.excluded"> 
           <q-item-side :icon="link.meta.icon" color="primary"/>
           <q-item-main :label="link.name"/>
         </q-item>

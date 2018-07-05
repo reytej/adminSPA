@@ -20,11 +20,13 @@ export default {
     return {
       pageIcon : this.$router.currentRoute.meta.icon,
       pageName : this.$router.currentRoute.name,
+      role_id  : this.$router.currentRoute.params.role_id
     }
   },
   created(){
   },
   mounted(){
+    console.log(this.role_id)
   }
 }
 </script>

@@ -13,7 +13,7 @@ export default [
       { name:'Company', path: '/company', component: () => import('pages/administration/company'), meta:{type:'sub', parent:'ADM00', code:'ADM00', icon:'fa fa-building'} },
       { name:'Users', path: '/users', component: () => import('pages/administration/users'), meta:{type:'sub', parent:'ADM00', code:'ADM01', icon:'fa fa-users'} },
       { name:'Roles', path: '/roles', component: () => import('pages/administration/roles'), meta:{type:'sub', parent:'ADM00', code:'ADM02', icon:'fa fa-lock'} },
-      { name:'RolesPages', path: '/roles_pages', component: () => import('pages/administration/roles_pages'), meta:{type:'sub', parent:'ADM00', code:'ADM02', icon:'fa fa-lock'} },
+      { name:'Roles Pages', path: '/roles_pages/:role_id', component: () => import('pages/administration/roles_pages'), meta:{type:'sub', parent:'ADM00', code:'ADM02', icon:'fa fa-lock', excluded: true} },
       // ITEMS ROUTE
       { name:'Inventory', path: '/items', component: () => import('pages/inventory/items'), meta:{type:'main', parent:'INV00', code:'INV00'} },
       { name:'Items', path: '/items', component: () => import('pages/inventory/items'), meta:{type:'sub', parent:'INV00', code:'INV01', icon:'fa fa-archive'} },

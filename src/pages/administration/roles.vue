@@ -14,7 +14,7 @@
         <div class="list-view" v-if="listView" v-show="currView == 'list'">
           <q-table :columns="listView.columns" :data="listView.datas" :pagination.sync="listView.pagination" row-key="name">
             <q-td slot="body-cell-actions" slot-scope="props" :props="props">
-              <q-btn flat aria-label="Edit role" v-if="!props.value.deleted"><q-icon name="fa fa-user-lock" /></q-btn>
+              <q-btn flat aria-label="Edit role" @click.native="$router.push({path: 'roles_pages/'+props.value.id})" v-if="!props.value.deleted"><q-icon name="fa fa-user-lock" /></q-btn>
               <q-btn flat aria-label="Edit role" @click.native="formOpen(props.value)"   v-if="!props.value.deleted"><q-icon name="fa fa-edit" /></q-btn>
               <q-btn flat aria-label="Ban role"  @click.native="formDelete(props.value)" v-if="!props.value.deleted"><q-icon name="fa fa-ban" /></q-btn>
               <q-btn flat aria-label="Restore role"  @click.native="formRestore(props.value)" v-if="props.value.deleted"><q-icon name="fa fa-redo" /></q-btn>
