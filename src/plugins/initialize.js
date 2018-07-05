@@ -16,8 +16,8 @@ export default ({ app, router, Vue, store }) => {
       store.state.user.token = adminSTR.token;
       store.state.user.last = adminSTR.last;
       store.state.user.defaultUrl = adminSTR.defaultUrl;
-      if(adminSTR.hasOwnProperty('links'))
-        store.state.configs.links = adminSTR.links;
+      if(adminSTR.hasOwnProperty('loaded'))
+        store.state.configs.loaded = adminSTR.loaded;
       if(adminSTR.hasOwnProperty('helpers'))
         store.state.helpers = adminSTR.helpers;
     }
@@ -27,7 +27,7 @@ export default ({ app, router, Vue, store }) => {
     store.state.user.token = null;
     store.state.user.last = 0;
     store.state.user.defaultUrl = '';
-    store.state.configs.links = [];
+    store.state.configs.loaded = null;
   }
   // set defaults
   let noty = {

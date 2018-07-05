@@ -17,13 +17,13 @@ export const setConfigs = (state, data) => {
 	// 	}
 	// }
 	// console.log(routes);
-	state.links = data.links;
+	state.loaded = Date.now();
 	// state.appRoutes = routes;
 	let adminSTR = {};
 	if(localStorage.getItem('adminSTR')){
 	  adminSTR = JSON.parse(localStorage.getItem('adminSTR'));
 	}
-	adminSTR.links = data.links;
-
+	adminSTR.loaded = state.loaded;
+	console.log(adminSTR);
 	localStorage.setItem('adminSTR', JSON.stringify(adminSTR));
 }

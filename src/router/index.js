@@ -33,21 +33,27 @@ Router.beforeEach((to, from, next) => {
   else{    
     if(to.matched.length > 0 && to.matched[0].meta.requireAuth){
       if(token) {
-        let links = store.state.configs.links;
-        if(Object.keys(links).length === 0 && to.path != "/boot"){
-          next({
-            path: '/boot',
-          })
-        } 
+        let loaded = store.state.configs.loaded;
+        if(to.path != "/boot"){
+          if(loaded != null){
+            next();
+          }
+          else{
+            next({
+              path: '/boot',
+            })
+          }
+        }
         else{
-          if(Object.keys(links).length > 0 && to.path == "/boot"){
+          if(loaded != null){
             next({
               path: store.state.user.defaultUrl,
             })
           }
-          else
+          else{
             next();
-        }     
+          }          
+        }   
       } else {
         next({
           path: '/login',
