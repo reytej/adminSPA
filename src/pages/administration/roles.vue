@@ -60,7 +60,7 @@ export default {
   data () {
     return {
       pageIcon : this.$router.currentRoute.meta.icon,
-      pageName : this.$router.currentRoute.name,
+      pageName : this.$router.currentRoute.meta.title,
       datas    : [],
       currView : 'list',
       listView : {
@@ -97,7 +97,7 @@ export default {
       let edit = {};
       for (var i = this.datas.length - 1; i >= 0; i--) {
         if(this.datas[i].id == id){
-          edit = {id:this.datas[i].id,code:this.datas[i].code,description:this.datas[i].description};
+          edit = {title:'Edit Role '+this.datas[i].description,id:this.datas[i].id,code:this.datas[i].code,description:this.datas[i].description};
           break;
         }
       }
@@ -112,7 +112,7 @@ export default {
       this.$q.loading.show({messageColor: 'primary',spinnerSize: 250,spinnerColor: 'primary'});
       let formData = new FormData();
       for(let frm in this.form){
-        if(this.form.hasOwnProperty(frm) && this.form[frm]){
+        if(this.form.hasOwnProperty(frm) && this.form[frm] && frm != 'title'){
           formData.append(frm,this.form[frm]);
         }
       }
@@ -201,15 +201,17 @@ export default {
         this.datas = data;
         let listDatas = [];
         for (var i = data.length - 1; i >= 0; i--) {
-          let createDate = date.formatDate(new Date(data[i].created_at),'DD/MM/YYYY');
-          let deletedDate = '';
-          let deleted = false;
-          if(data[i].deleted_at){
-            deletedDate = date.formatDate(new Date(data[i].deleted_at),'DD/MM/YYYY');
-            deleted = true;
+          if(data[i].code != 'ADMIN'){
+            let createDate = date.formatDate(new Date(data[i].created_at),'DD/MM/YYYY');
+            let deletedDate = '';
+            let deleted = false;
+            if(data[i].deleted_at){
+              deletedDate = date.formatDate(new Date(data[i].deleted_at),'DD/MM/YYYY');
+              deleted = true;
+            }
+            let actions = {id:data[i].id,deleted:deleted};
+            listDatas.push({code:data[i].code,description:data[i].description,created_at:createDate,deleted_at:deletedDate,actions:actions});
           }
-          let actions = {id:data[i].id,deleted:deleted};
-          listDatas.push({code:data[i].code,description:data[i].description,created_at:createDate,deleted_at:deletedDate,actions:actions});
         }
         this.listView.datas = listDatas;
         this.$q.loading.hide();

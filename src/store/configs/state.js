@@ -1,4 +1,5 @@
 export default {
-  loaded: null,
-  appRoutes: []
+  loaded 		: null,
+  appRoutes 	: [],
+  pages 		: []
 }

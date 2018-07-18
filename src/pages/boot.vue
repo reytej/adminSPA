@@ -10,30 +10,21 @@
 <script>
 export default {
   name: 'PageBoot',
+  data () {
+    return {
+      goTo : '/',
+    }
+  },
   created(){
    this.goBoot();
-   // this.$api.post('getConfigs')
-   //  .then((response) => {
-   //    let data = response.data.details;
-   //    this.$store.commit('configs/setConfigs',data);
-   //    this.$router.go(this.$store.state.user.defaultUrl);
-   //  })
-   //  .catch((error) => {
-   //    this.$q.notify({
-   //      color: 'negative',
-   //      position: 'top',
-   //      message: error.response.data.message,
-   //      icon: 'report_problem'
-   //    });
-   //  });
   },
   mounted(){
-    // if(Object.keys(this.$store.state.configs.links).length > 0)
-      // this.$router.go(this.$store.state.user.defaultUrl);
   },
   methods:{
     async goBoot(){
-      await this.$axios.post(this.$apiUrl + 'getConfigs')
+      let formData = new FormData();
+      formData.append('role','EMPLY');
+      await this.$axios.post(this.$apiUrl + 'getConfigs',formData)
       .then( (response) => {
         let data = response.data.details;
         this.$store.commit('configs/setConfigs',data);
@@ -45,7 +36,7 @@ export default {
         this.$store.commit('helpers/setDropdown',{dropName: 'roles', options: data});
       })
       .catch((error) => {});
-      this.$router.go(this.$store.state.user.defaultUrl);   
+      this.$router.go(this.goTo);   
     }
   }
 }

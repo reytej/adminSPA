@@ -76,7 +76,7 @@ export default {
   data () {
     return {
       pageIcon : this.$router.currentRoute.meta.icon,
-      pageName : this.$router.currentRoute.name,
+      pageName : this.$router.currentRoute.meta.title,
       datas    : [],
       currView : 'list',
       rolesDrop: this.$store.state.helpers.dropdowns.roles,

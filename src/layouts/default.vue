@@ -21,7 +21,7 @@
       <q-list no-border link inset-delimiter class="sidebar-list">
         <q-item  v-for="(link,key) in sideLinks" :key="key" @click.native="goTo(link.path)" v-if="!link.meta.excluded"> 
           <q-item-side :icon="link.meta.icon" color="primary"/>
-          <q-item-main :label="link.name"/>
+          <q-item-main :label="link.meta.title"/>
         </q-item>
       </q-list>
     </q-layout-drawer>
@@ -61,6 +61,8 @@ export default {
         this.drawerIcon = 'fa fa-chevron-right';
     },
     setLinks(){
+      let role = this.$store.state.user.details.role;
+      let pages = this.$store.state.configs.pages;
       let mainRoutes = this.$router.options.routes[0].children;
       let currRoute = this.$router.currentRoute;
       let mainLinks = [];
@@ -69,10 +71,22 @@ export default {
         let mnr = mainRoutes[i];
         if(mnr.hasOwnProperty('meta')){
           if(mnr.meta.type == 'main'){
-            mainLinks.push(mnr);
+            let code = mnr.meta.code;
+            if(role == 'ADMIN')
+              mainLinks.push(mnr);
+            else{
+              if(pages.indexOf(code) != -1)
+                mainLinks.push(mnr);
+            }
           }
           if(currRoute.meta.parent == mnr.meta.parent && mnr.meta.type == 'sub'){
-            subLinks.push(mnr);
+            let code = mnr.meta.code;
+            if(role == 'ADMIN')
+              subLinks.push(mnr);
+            else{
+              if(pages.indexOf(code) != -1)
+                subLinks.push(mnr);
+            }
           }
         }
       }

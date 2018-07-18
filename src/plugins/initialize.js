@@ -16,8 +16,11 @@ export default ({ app, router, Vue, store }) => {
       store.state.user.token = adminSTR.token;
       store.state.user.last = adminSTR.last;
       store.state.user.defaultUrl = adminSTR.defaultUrl;
+      
       if(adminSTR.hasOwnProperty('loaded'))
         store.state.configs.loaded = adminSTR.loaded;
+      if(adminSTR.hasOwnProperty('pages'))
+        store.state.configs.pages = adminSTR.pages;
       if(adminSTR.hasOwnProperty('helpers'))
         store.state.helpers = adminSTR.helpers;
     }

@@ -13,6 +13,8 @@ export const goLogout = (state, token) => {
 	state.db = null;
 	state.token = null;
 	state.last = 0;
+	store.state.configs.loaded = null;
 	store.state.configs.links = [];
+	store.state.configs.pages = [];
 	localStorage.clear();
 }

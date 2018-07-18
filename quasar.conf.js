@@ -73,7 +73,8 @@ module.exports = function (ctx) {
         'QCollapsible',
         'QDatetime',
         'QModal',
-        'QModalLayout'
+        'QModalLayout',
+        'QTree'
       ],
       directives: [
         'Ripple',

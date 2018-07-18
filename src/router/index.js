@@ -36,7 +36,18 @@ Router.beforeEach((to, from, next) => {
         let loaded = store.state.configs.loaded;
         if(to.path != "/boot"){
           if(loaded != null){
-            next();
+            let pages = store.state.configs.pages;
+            let role = store.state.user.details.role;
+            if(role != 'ADMIN' && to.path != '/'){
+              if(pages.indexOf(to.meta.code) != -1)
+                next();
+              else{              
+                next({path: store.state.user.defaultUrl});
+              }
+            }
+            else{
+              next();
+            }
           }
           else{
             next({
@@ -46,9 +57,7 @@ Router.beforeEach((to, from, next) => {
         }
         else{
           if(loaded != null){
-            next({
-              path: store.state.user.defaultUrl,
-            })
+            next({path: store.state.user.defaultUrl})
           }
           else{
             next();
