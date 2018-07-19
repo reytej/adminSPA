@@ -6,6 +6,7 @@ module.exports = function (ctx) {
     plugins: [
       'axios',
       'initialize',
+      'components',
     ],
     css: [
       'app.styl'

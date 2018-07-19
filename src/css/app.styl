@@ -7,7 +7,7 @@ body
 	margin-left: 10px
 
 .sidebar
-	width 300px
+	width 250px
 	background-color: $secondBG
 	color: $fontSCD
 
@@ -46,6 +46,10 @@ body
 .q-btn .q-icon, 
 .q-btn .q-spinner
 	font-size 1em
+
+.q-icon, 
+.q-icon.material-icons
+	vertical-align: baseline
 
 .q-toolbar
 	padding-left 15px
@@ -93,7 +97,8 @@ body
 		padding-right: 0
 		border-left: 0 
 		border-right: 0
-	.page-bar .title
+	.page-bar .title,
+	.page-bar .subtitle
 		position: relative
 		display: inline-block
 		width: auto;
@@ -107,6 +112,15 @@ body
 		font-size: 20px
 		margin-right : 5px
 		margin-top : -5px
+	.page-bar .subtitle
+		max-width: none
+		font-size: 12px
+	.page-bar .blocks.subtitle
+		padding: 0
+		height: auto
+	.page-bar .subtitle:before
+		content: "/"
+		margin-right: 8px;
 	.page-bar .tools
 		display: inline-block
 		width: auto;
@@ -137,4 +151,19 @@ body
 	.page-form .q-card .q-card-title
 		padding: 10px 15px
 		height: 50px
+	.page-form .head
+		margin-bottom: 20px
+	.page-form .head .q-field .q-input
+		max-width: 550px
+	.page-form .body
+		padding: 20px 0px
+	.page-form .body .title
+		font-size: $formFontTitleSize
+		margin: 0 0 20px 0
+		font-weight: 500
+	.page-form .body .q-field
+		margin-bottom: 15px
+	.page-form .body .q-field .q-input .q-icon
+		font-size: 18px
+
 

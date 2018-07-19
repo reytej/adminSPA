@@ -1,13 +1,11 @@
 <template>
   <q-page>
     <!-- PAGE BAR -->
-      <div class="page-bar shadow-1">
-        <div class="title blocks"><q-icon :name="pageIcon" /><span>{{pageName}}</span></div>
-        <div class="tools pull-right">
+      <page-bar>
+        <div slot="tools" class="tools pull-right">
           <q-btn flat aria-label="Create" label="Add New" @click="formOpen()"/>
-          <q-btn flat aria-label="Filter"><q-icon name="fa fa-search" /></q-btn>
-        </div>
-      </div>
+        </div>        
+      </page-bar>
     <!-- PAGE BAR -->
     <!-- PAGE CONTENT -->
       <div class="page-content" style="margin-top: 2px">

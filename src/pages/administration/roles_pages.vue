@@ -1,17 +1,17 @@
 <template>
   <q-page>
     <!-- PAGE BAR -->
-      <div class="page-bar shadow-1">
-        <div class="title blocks"><q-icon :name="pageIcon" /><span>{{pageName}}</span></div>
-        <div class="tools pull-right">
+      <page-bar :subtitle="subtitle">
+        <div slot="tools" class="tools pull-right">
           <q-btn flat aria-label="Save" icon="fa fa-save" label="Save" @click.native="savePages()"/>
           <q-btn flat aria-label="Back to list" icon="fa fa-table" label="Back to List" @click.native="$router.push('/roles')"/>
-        </div>
-      </div>
+        </div>        
+      </page-bar>
+    <!-- PAGE BAR -->
       <div class="page-form">
       <q-card>
         <q-card-title>
-          <strong>{{details.code}} - {{details.description}}</strong>
+          <strong>Set Access of {{details.code}} - {{details.description}}</strong>
         </q-card-title>
         <q-card-separator />
         <q-card-main>
@@ -27,7 +27,6 @@
         </q-card-main>
       </q-card>
       </div>
-    <!-- PAGE BAR -->
   </q-page>
 </template>
 
@@ -37,8 +36,7 @@ export default {
   name: 'PageRoles',
   data () {
     return {
-      pageIcon : this.$router.currentRoute.meta.icon,
-      pageName : this.$router.currentRoute.meta.title,
+      subtitle : [],
       role_id  : this.$router.currentRoute.params.role_id,
       details  : {},
       ticked   : [],
@@ -56,7 +54,7 @@ export default {
       if(links[i].meta){
         if(links[i].meta.type == 'main' && !links[i].meta.excluded){
           let mainLink = links[i];
-          let main = {value:mainLink.meta.code, label:mainLink.meta.title,children:[]};
+          let main = {value:mainLink.meta.code, label:mainLink.name.toUpperCase(),children:[]};
           for (var sub = links.length - 1; sub >= 0; sub--) {
             if(links[sub].meta && links[sub].meta.type == 'sub' && mainLink.meta.code == links[sub].meta.parent){
               let subLink = links[sub];
@@ -133,6 +131,8 @@ export default {
         let data = response.data.details;
         if(data){
           this.details = data;
+          this.ticked = this.details.pages.split(",");
+          this.subtitle.push(this.details.code+' - '+this.details.description);
         }  
         else{
           let noty = this.$noty.error;
@@ -142,8 +142,6 @@ export default {
         this.$q.loading.hide();
       })
       .catch((error) => {
-        // let noty = this.$noty.error;
-        // noty.message = "Role not found";
         this.$router.push('/roles'); 
         this.$q.loading.hide();
       });

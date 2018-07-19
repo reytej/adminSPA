@@ -50,5 +50,4 @@ export default ({ app, router, Vue, store }) => {
                 } 
   }
   Vue.prototype.$noty = noty;
-
 }
