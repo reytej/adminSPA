@@ -1,5 +1,6 @@
 import { date } from 'quasar'
 import { setAuthorizationToken } from './axios'
+import { Loading,QSpinnerOval } from 'quasar'
 
 export default ({ app, router, Vue, store }) => {
   let adminSTR = {};
@@ -50,4 +51,7 @@ export default ({ app, router, Vue, store }) => {
                 } 
   }
   Vue.prototype.$noty = noty;
+
+  Vue.prototype.$loadflt = {spinner: 'QSpinnerOval',messageColor: 'primary',spinnerSize: 250,spinnerColor: 'primary'};
+
 }

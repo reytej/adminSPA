@@ -39,8 +39,15 @@ Router.beforeEach((to, from, next) => {
             let pages = store.state.configs.pages;
             let role = store.state.user.details.role;
             if(role != 'ADMIN' && to.path != '/'){
-              if(pages.indexOf(to.meta.code) != -1)
+              let excluded = to.meta.excluded;
+              let go = true;
+              if(!excluded){
+                if(pages.indexOf(to.meta.code) == -1)
+                  go = false;
+              }
+              if(go){
                 next();
+              }
               else{              
                 next({path: store.state.user.defaultUrl});
               }
@@ -62,7 +69,7 @@ Router.beforeEach((to, from, next) => {
           else{
             next();
           }          
-        }   
+        }
       } else {
         next({
           path: '/login',

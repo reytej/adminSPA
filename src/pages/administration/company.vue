@@ -33,7 +33,6 @@
 		  	    	</div>
 	  	    	</div>
 	  	    </div>
-	  	    <q-card-separator />
 	  	  </q-card-main>
 	  	</q-card>
   	</div>
@@ -49,8 +48,60 @@ export default {
       form     : {}, 
     }
   },
-  created(){
-  	// console.log(this.$store.state.user.details);
+  methods: {
+  	saveForm(){
+  		let formData = new FormData();
+  		for(let frm in this.form){
+  			if(this.form.hasOwnProperty(frm)){
+  				formData.append(frm,this.form[frm]);
+  			}
+  		}
+  		this.$q.loading.show(this.$loadflt);
+  		this.$api.post('company/update',formData)
+  		.then((response) => {
+  		  let data = response.data.details;
+  		  console.log(data);
+  		  if(data){
+  		  	let noty = this.$noty.success;
+  		  	noty.message = response.data.message;
+  		  	this.$q.notify(noty);
+  		  }
+  		  this.$q.loading.hide();
+  		})
+  		.catch((error) => {
+  		  this.$q.notify({
+  		    color: 'negative',
+  		    position: 'top',
+  		    message: 'Failed Something went wrong',
+  		    icon: 'report_problem'
+  		  });
+  		  this.$q.loading.hide();
+  		});
+  	}
+  },
+  mounted(){
+  	this.$q.loading.show(this.$loadflt);
+  	this.$api.post('company')
+  	.then((response) => {
+  	  let data = response.data.details;
+  	  this.form = {
+  	  	name 		: 	data.name,
+  	  	email 		: 	data.email,
+  	  	tin 		: 	data.tin,
+  	  	address 	: 	data.address,
+  	  	contact_no 	: 	data.contact_no,
+  	  }
+  	  this.$q.loading.hide();
+  	})
+  	.catch((error) => {
+  	  this.$q.notify({
+  	    color: 'negative',
+  	    position: 'top',
+  	    message: 'Failed to load',
+  	    icon: 'report_problem'
+  	  });
+  	  this.$q.loading.hide();
+  	});
   }
 }
 </script>

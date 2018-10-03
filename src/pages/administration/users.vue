@@ -3,14 +3,14 @@
     <!-- PAGE BAR -->
       <page-bar>
         <div slot="tools" class="tools pull-right">
-          <q-btn flat aria-label="Create" label="Add New" @click="formOpen()"/>
+          <q-btn flat aria-label="Create" icon="fa fa-plus" label="Add New" @click="formOpen()"/>
         </div>        
       </page-bar>
     <!-- PAGE BAR -->
     <!-- PAGE CONTENT -->
-      <div class="page-content" style="margin-top: 2px">
+      <div class="page-content">
         <div class="list-view" v-if="listView" v-show="currView == 'list'">
-          <q-table :columns="listView.columns" :data="listView.datas" :pagination.sync="listView.pagination" row-key="name">
+          <q-table dense :columns="listView.columns" :data="listView.datas" :pagination.sync="listView.pagination" row-key="name">
             <q-td slot="body-cell-actions" slot-scope="props" :props="props">
               <q-btn flat aria-label="Edit user" @click.native="formOpen(props.value)"   v-if="!props.value.deleted"><q-icon name="fa fa-edit" /></q-btn>
               <q-btn flat aria-label="Ban user"  @click.native="formDelete(props.value)" v-if="!props.value.deleted"><q-icon name="fa fa-ban" /></q-btn>
@@ -79,7 +79,7 @@ export default {
       listView : {
                   pagination: {sortBy:'name',descending:false,rowsPerPage: 25},
                   columns   : [
-                                {name:'id',field:'id',label:'#',align:'left',sortable:true},
+                                {name:'id',field:'id',label:'#',align:'left',sortable:false},
                                 {name:'name',field:'name',label:'Name',align:'left',sortable:true},
                                 {name:'email',field:'email',label:'Email',align:'left',sortable:true},
                                 {name:'role',field:'role',label:'Role',align:'left',sortable:true},

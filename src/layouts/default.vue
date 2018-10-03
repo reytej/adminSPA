@@ -8,7 +8,7 @@
         <q-btn flat dense round aria-label="Menu" class="toolbar-btns">
           <q-icon name="fa fa-cogs" />
         </q-btn>
-        <q-btn flat dense round aria-label="Menu" class="toolbar-btns">
+        <q-btn flat dense round aria-label="Menu" @click.native="goTo('/profile')" class="toolbar-btns">
           <q-icon name="fa fa-user" />
         </q-btn>
         <q-btn flat dense round @click.native="logOut()" aria-label="Logout" class="toolbar-btns">
@@ -90,8 +90,8 @@ export default {
           }
         }
       }
-      this.links = mainLinks; 
-      this.sideLinks = subLinks; 
+      this.links = mainLinks.reverse(); 
+      this.sideLinks = subLinks.reverse(); 
     },
     goTo(path){
       this.$router.push(path); 

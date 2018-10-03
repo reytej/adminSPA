@@ -2,25 +2,19 @@
 html,
 body
 	color: $fontCLR
-
 .toolbar-btns
 	margin-left: 10px
-
 .sidebar
 	width 250px
 	background-color: $secondBG
 	color: $fontSCD
-
 .sidebar .text-primary 
 	color: $fontSCD !important
-
 .sidebar .q-item-letter,
 .sidebar .q-item-icon
 	font-size:24px;
-
 .sidebar .q-list-link > .q-item:hover
 	background-color: $secondBGHVR
-
 .sidebar .logo
 	padding: 10px
 	padding-top: 15px
@@ -31,30 +25,24 @@ body
 	font-weight: 500
 	background-color: $primary
 	color: $fontINV
-
 .sidebar .sidebar-list	
 	-webkit-box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.5)
 	-moz-box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.5)
 	box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.5)
-
 .q-layout-page	
 	-webkit-box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.5)	
 	-moz-box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.5)
 	box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.5)
 	background-color: $thirdBG
-
 .q-btn .q-icon, 
 .q-btn .q-spinner
 	font-size 1em
-
 .q-icon, 
 .q-icon.material-icons
 	vertical-align: baseline
-
 .q-toolbar
 	padding-left 15px
 	padding-right 15px
-
 .row-input
 	margin-bottom 10px
 .row-input-header
@@ -73,7 +61,6 @@ body
 .form-modal .q-layout-footer .q-toolbar .footer-btns 
 	width: 100%
 	text-align: right
-	
 /* PAGE BAR */
 	.page-bar
 		position: relative
@@ -165,5 +152,57 @@ body
 		margin-bottom: 15px
 	.page-form .body .q-field .q-input .q-icon
 		font-size: 18px
-
-
+/* LIST VIEW */
+	.list-view .q-table-container .q-table th
+		background-color: $secondary
+		color: $pageBarCLR
+/* PAGE PROFILE */
+	.page-profile 
+		font-size: $formFontNormalSize
+	.page-profile .head
+		display: block
+		position: relative
+		width: 100%
+		min-height: 80px
+		padding: 10px
+		color: $fontMainCLR
+	.page-profile .head .logo
+		display: block
+		height: 70px
+		float: left
+	.page-profile .head .logo img
+		height: 70px
+		border-radius: 100%
+	.page-profile .head .main-details
+		display: block
+		min-height: 70px
+		padding-left: 90px
+		padding-top: 15px
+	.page-profile .head .main-details .title
+		display: block
+		font-weight: 500
+		font-size: $formFontTitleSize
+	.page-profile .head .main-details .subtitle
+		display: block
+		color: $fontSCD
+		font-size: $formFontSubitleSize
+	.page-profile .body .q-tabs .q-tabs-head
+		min-height: 30px
+		background-color: #FFFFFF !important
+		padding: 0 
+		color: $secondary !important
+		border-top: 1px solid $secondary
+		border-bottom: 1px solid $secondary
+	.page-profile .body .q-tabs .q-tab-pane
+		margin: 10px
+	.page-profile .body .q-tabs .q-tab
+		font-size: 0.8em
+		min-height: 25px
+	.page-profile .body .q-tabs .q-tab.active
+		background-color: $secondary !important
+		color: #FFFFFF !important
+	.page-profile .body .q-tabs .q-tab.active .q-tabs-bar
+		border: 0
+	.page-profile .page-form
+		margin: 0
+/* PAGE PROFILE */

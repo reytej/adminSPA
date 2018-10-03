@@ -56,11 +56,11 @@ export default {
           let mainLink = links[i];
           let main = {value:mainLink.meta.code, label:mainLink.name.toUpperCase(),children:[]};
           for (var sub = links.length - 1; sub >= 0; sub--) {
-            if(links[sub].meta && links[sub].meta.type == 'sub' && mainLink.meta.code == links[sub].meta.parent){
+            if(links[sub].meta && !links[sub].meta.excluded && links[sub].meta.type == 'sub' && mainLink.meta.code == links[sub].meta.parent){
               let subLink = links[sub];
               let child = {value:subLink.meta.code, label:subLink.meta.title, icon:subLink.meta.icon,children:[]};
               for (var gnd = links.length - 1; gnd >= 0; gnd--) {
-                if(links[gnd].meta && links[gnd].meta.type == 'sub' && mainLink.meta.code == links[gnd].meta.parent){
+                if(links[gnd].meta && !links[gnd].meta.excluded && links[gnd].meta.type == 'sub' && mainLink.meta.code == links[gnd].meta.parent){
                   let gndLink = links[gnd];
                   let gndChild = {value:gndLink.meta.code, label:gndLink.meta.title, icon:gndLink.meta.icon};
                   child.children.push(gndChild);
