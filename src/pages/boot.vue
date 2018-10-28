@@ -36,7 +36,18 @@ export default {
         this.$store.commit('helpers/setDropdown',{dropName: 'roles', options: data});
       })
       .catch((error) => {});
-      this.$router.go(this.goTo);   
+      this.$router.go(this.goTo);
+
+      //stock categories - start
+      await this.$axios.post(this.$apiUrl + 'dropdowns/stock_categories')
+              .then( (response) => {
+              let data = response.data.details;
+          this.$store.commit('helpers/setDropdown',{dropName: 'stock_categories', options: data});
+      })
+      .catch((error) => {});
+      this.$router.go(this.goTo);
+      //stock categories - end
+
     }
   }
 }

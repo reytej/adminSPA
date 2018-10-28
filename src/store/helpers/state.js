@@ -1,5 +1,8 @@
 export default {
   dropdowns 		: {
-  						roles : []
+  						roles : [],
+  						stock_categories : [],
+  						stock_divisions : [],
+  						stock_origins : []
   			  		  },
 }
