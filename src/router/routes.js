@@ -10,8 +10,8 @@ export default [
     children: [
       { name:'home', path: '', component: () => import('pages/index') },
       // ADMINISTRATIONS ROUTE
-      { name:'admin', path: '/company', component: () => import('pages/administration/company'), meta:{type:'main', parent:'ADM00', code:'ADM00', title:'Company', icon:'fa fa-building'} },
-      { name:'company', path: '/company', component: () => import('pages/administration/company'), meta:{type:'sub', parent:'ADM00', code:'ADM01', title:'Company', icon:'fa fa-building'} },
+      { name:'admin', path: '/company', component: () => import('pages/administration/company'), meta:{type:'main', parent:'ADM00', code:'ADM00', title:'Companies', icon:'fa fa-building'} },
+      { name:'company', path: '/company', component: () => import('pages/administration/company'), meta:{type:'sub', parent:'ADM00', code:'ADM01', title:'Companies', icon:'fa fa-building'} },
       { name:'users', path: '/users', component: () => import('pages/administration/users'), meta:{type:'sub', parent:'ADM00', code:'ADM02', title:'Users', icon:'fa fa-users'} },
       { name:'roles', path: '/roles', component: () => import('pages/administration/roles'), meta:{type:'sub', parent:'ADM00', code:'ADM03', title:'Roles', icon:'fa fa-lock'} },
       { name:'roles_pages', path: '/roles_pages/:role_id', component: () => import('pages/administration/roles_pages'), meta:{type:'sub', parent:'ADM00', title:'Roles Pages', icon:'fa fa-lock', excluded: true} },
@@ -24,7 +24,9 @@ export default [
       { name:'stock_uoms', path: '/stock_uoms', component: () => import('pages/inventory/stock_uoms'), meta:{type:'sub', parent:'INV00', code:'INV06', title:'Stock UOM', icon:'fa fa-box'} },
       { name:'items_form', path: '/items_form', component: () => import('pages/inventory/items_form'), meta:{type:'sub', parent:'INV00', title:'Items', icon:'fa fa-archive', excluded: true} },
       { name:'items_form', path: '/items_form/:item_id', component: () => import('pages/inventory/items_form'), meta:{type:'sub', parent:'INV00', title:'Items', icon:'fa fa-archive', excluded: true} },
-      { name:'purchases', path: '/purchase', component: () => import('pages/inventory/purchase'), meta:{type:'sub', parent:'INV00', title:'Purchase', code:'INV02', icon:'fa fa-truck'} },
+      // PURCHASE ROUTE
+      { name:'purchases', path: '/purchase', component: () => import('pages/purchase/po'), meta:{type:'main', parent:'PUR00', code:'PUR01', title:'Purchase',  icon:'fa fa-cubes'} },
+
       // SALES ROUTE
       // { name:'sales', path: '/sales', component: () => import('pages/sales/transactions'), meta:{type:'main', parent:'SLE00',  title:'Transactions', icon:'fa fa-table', code:'SLE00'} },
       // { name:'sales_trans', path: '/sales', component: () => import('pages/sales/transactions'), meta:{type:'sub', parent:'SLE00', code:'SLE01', title:'Transactions', icon:'fa fa-table'} },
