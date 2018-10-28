@@ -11,7 +11,7 @@ export default ({ store , Vue }) => {
   axios.defaults.headers.common['Content-Type'] = 'application/json'
   axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
   axios.defaults.headers.common['Accept'] = 'application/json'
-  var baseUrl = 'http://backend.test/api/';
+  var baseUrl = 'http://localhost/backendSPA/public/api/';
   Vue.prototype.$apiUrl = baseUrl;
   Vue.prototype.$api = axios.create({
 	  baseURL: baseUrl
