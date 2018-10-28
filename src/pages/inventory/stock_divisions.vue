@@ -29,44 +29,12 @@
         <q-toolbar slot="header">
           <q-btn flat @click="formClose()" class="close" icon="fa fa-times"/>
           <q-toolbar-title v-if="form.title">{{form.title}}</q-toolbar-title>
-          <q-toolbar-title v-if="!form.title">Add new Item</q-toolbar-title>
+          <q-toolbar-title v-if="!form.title">Add new Stock Division</q-toolbar-title>
         </q-toolbar>
         <div class="body">
           <form :model="form" @submit.prevent="formSave()">
             <div class="row-input-header">
-              <q-input float-label="Item Code" v-model="form.code"/>
-            </div>
-            <div class="row-input-header">
-              <q-input float-label="Description" v-model="form.description"/>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="row-input">
-                  <q-select v-model="form.category_id" filter autofocus-filter clearable float-label="Category" :options="stockCategoriesDrop"/>
-                </div>
-                <div class="row-input">
-                  <q-select v-model="form.division_id" filter autofocus-filter clearable float-label="Division" :options="stockDivisionsDrop"/>
-                </div>
-              </div>
-              <div class="col">
-                <div class="row-input">
-                  <q-select v-model="form.origin_id" filter autofocus-filter clearable float-label="Origin" :options="stockOriginsDrop"/>
-                </div>
-                <div class="row-input">
-                  <q-select v-model="form.default_uom" filter autofocus-filter clearable float-label="Reporting UOM" :options="stockUomsDrop"/>
-                </div>
-              </div>
-              <!--<div class="col">-->
-                <!--<div class="row-input">-->
-                  <!--<q-input float-label="Email" v-model="form.email"/>-->
-                <!--</div>-->
-                <!--<div class="row-input">-->
-                  <!--<q-input type="password" float-label="Confirm Password" v-model="form.c_password"/>-->
-                <!--</div>-->
-              <!--</div>-->
-            </div>
-            <div class="row-input-header">
-              <q-input float-label="Remarks" v-model="form.remarks"/>
+              <q-input float-label="Division Name" v-model="form.division"/>
             </div>
           </form>
         </div>
@@ -89,28 +57,11 @@ export default {
       pageIcon : this.$router.currentRoute.meta.icon,
       pageName : this.$router.currentRoute.meta.title,
       datas    : [],
-      //stockCategoriesDrop : this.$store.state.helpers.dropdowns.stock_categories,
-      stockCategoriesDrop : [],
-      //stockDivisionsDrop : this.$store.state.helpers.dropdowns.stock_divisions,
-      stockDivisionsDrop : [],
-      //stockOriginsDrop : this.$store.state.helpers.dropdowns.stock_origins,
-      stockOriginsDrop : [],
-      stockUomsDrop : [],
       currView : 'list',
       listView :  {
-                    pagination: {sortBy:'code',descending:false,rowsPerPage: 25},
+                    pagination: {sortBy:'division',descending:false,rowsPerPage: 25},
                     columns   : [
-                                  {name:'code',field:'code',label:'Item Code',align:'left',sortable:true},
-                                  {name:'description',field:'description',label:'Description Name',align:'left',sortable:true},
-                                  {name:'category',field:'category',label:'Category',align:'left',sortable:true},
-                                  {name:'division_name',field:'division_name',label:'Division',align:'left',sortable:true},
-                                  {name:'origin_name',field:'origin_name',label:'Origin',align:'left',sortable:true},
-                                  {name:'tax_type_id',field:'tax_type_id',label:'Tax Type',align:'left',sortable:true},
-                                  {name:'default_uom',field:'default_uom',label:'Default UOM',align:'left',sortable:true},
-                                  //{name:'qty_per_box',field:'qty_per_box',label:'Qty per UOM',align:'left',sortable:true},
-                                  //{name:'actual_cost',field:'actual_cost',label:'Actual Cost',align:'right',sortable:true},
-                                  //{name:'last_cost',field:'last_cost',label:'Last Cost',align:'right',sortable:true},
-                                  //{name:'remarks',field:'remarks',label:'Remarks',align:'right',sortable:true},
+                                  {name:'division',field:'division',label:'Item Division',align:'left',sortable:true},
                                   {name:'actions',field:'actions',label:' ',align:'center',sortable:false},
                                 ],
                     datas     : []
@@ -134,7 +85,7 @@ export default {
         this.formMdl = false;
     },
     formEdit(id){
-        console.log('edit');
+        //console.log('edit');
         let edit = {};
         //this.datas ito kasi yung pinagbabasihan
         for (var i = this.datas.length - 1; i >= 0; i--) {
@@ -145,13 +96,7 @@ export default {
                 edit = {
                     //code: datas.property nung code
                     id: row.id,
-                    code: row.code,
-                    description: row.description,
-                    category_id: row.category_id,
-                    division_id: row.division_id,
-                    origin_id: row.origin_id,
-                    default_uom: row.default_uom,
-                    remarks: row.remarks
+                    division: row.division
                 };
                 // PLOT MO DITO YUNG MGA MODEL NUNG NASA FORM  AT
 
@@ -162,9 +107,9 @@ export default {
         this.form = edit;
     },
     formSave(id){
-          let url = 'stock_items/store';
+          let url = 'stock_divisions/store';
           if(id){
-              url = 'stock_items/update/'+id;
+              url = 'stock_divisions/update/'+id;
           }
 
           this.$q.loading.show({messageColor: 'primary',spinnerSize: 250,spinnerColor: 'primary'});
@@ -179,11 +124,11 @@ export default {
           this.$api.post(url,formData)
               .then((response) => {
               let data = response.data.details;
-              //console.log(data);
+              console.log(data);
           if(data.status == 'success'){
 
               let noty = this.$noty.success;
-              noty.message = 'Stock item successfully saved';
+              noty.message = 'Stock division successfully saved';
               this.$q.notify(noty);
 
               this.loadList();
@@ -216,19 +161,19 @@ export default {
           }).then(() => {
 
               this.$q.loading.show({messageColor: 'primary',spinnerSize: 250,spinnerColor: 'primary'});
-          this.$api.post('stock_items/delete/'+del.id)
+          this.$api.post('stock_divisions/delete/'+del.id)
               .then((response) => {
               let data = response.data.details;
           if(data){
                 let noty = this.$noty.success;
-                noty.message = 'Stock item successfully deleted';
+                noty.message = 'Stock division was successfully deleted';
                 this.$q.notify(noty);
                 this.loadList();
             }
             this.$q.loading.hide();
         })
         .catch((error) => {
-                let noty = this.$noty.error;
+                let noty = this.$noty.negative;
             noty.message = error.response.data.message;
             this.$q.notify(noty);
             this.$q.loading.hide();
@@ -239,22 +184,21 @@ export default {
     loadList(){
       //this.$q.loading.show(this.$loadflt);
       this.$q.loading.show({messageColor: 'primary',spinnerSize: 250,spinnerColor: 'primary',});
-      this.$api.post('stock_items')
+      this.$api.post('stock_divisions')
       .then((response) => {
-        let datas = response.data.details.stock_items;
-        this.datas = response.data.details.stock_items; // PARA MASAVE YUNG BUONG LIST NA DI NAEEDIT
-        //console.log(datas);
+        let datas = response.data.details;
+        this.datas = response.data.details; // PARA MASAVE YUNG BUONG LIST NA DI NAEEDIT
 
-        this.stockCategoriesDrop = response.data.details.stock_categories;
-        this.stockDivisionsDrop = response.data.details.stock_divisions;
-        this.stockOriginsDrop = response.data.details.stock_origins;
-        this.stockUomsDrop = response.data.details.stock_uoms;
+        //this.stockCategoriesDrop = response.data.details.stock_categories;
+        //this.stockDivisionsDrop = response.data.details.stock_divisions;
+        //this.stockOriginsDrop = response.data.details.stock_origins;
+        //this.stockUomsDrop = response.data.details.stock_uoms;
 
         this.listView.datas = this.initDatas(datas);
         this.$q.loading.hide();
       })
       .catch((error) => {
-        let noty = this.$noty.error;
+        let noty = this.$noty.negative;
         noty.message = 'Failed to load';
         this.$q.loading.hide();
       });
@@ -263,11 +207,7 @@ export default {
       let list = [];
       for (var i = datas.length - 1; i >= 0; i--) {
 
-        datas[i].code = datas[i].code;
-        datas[i].description = datas[i].description;
-        datas[i].category = datas[i].category.category;
-        datas[i].division_name = datas[i].division.division;
-        datas[i].origin_name = datas[i].origin.origin;
+        datas[i].division = datas[i].division;
         datas[i].deleted = datas[i].deleted;
 
               let deleted = false;

@@ -18,6 +18,10 @@ export default [
       // ITEMS ROUTE
       { name:'inventory', path: '/items', component: () => import('pages/inventory/items'), meta:{type:'main', parent:'INV00', title:'Items', icon:'fa fa-archive', code:'INV00'} },
       { name:'items', path: '/items', component: () => import('pages/inventory/items'), meta:{type:'sub', parent:'INV00', code:'INV01', title:'Items', icon:'fa fa-archive'} },
+      { name:'stock_categories', path: '/stock_categories', component: () => import('pages/inventory/stock_categories'), meta:{type:'sub', parent:'INV00', code:'INV03', title:'Categories', icon:'fa fa-list-alt'} },
+      { name:'stock_divisions', path: '/stock_divisions', component: () => import('pages/inventory/stock_divisions'), meta:{type:'sub', parent:'INV00', code:'INV04', title:'Divisions', icon:'fa fa-code-branch'} },
+      { name:'stock_origins', path: '/stock_origins', component: () => import('pages/inventory/stock_origins'), meta:{type:'sub', parent:'INV00', code:'INV05', title:'Origins', icon:'fa fa-map-marker-alt'} },
+      { name:'stock_uoms', path: '/stock_uoms', component: () => import('pages/inventory/stock_uoms'), meta:{type:'sub', parent:'INV00', code:'INV06', title:'Stock UOM', icon:'fa fa-box'} },
       { name:'items_form', path: '/items_form', component: () => import('pages/inventory/items_form'), meta:{type:'sub', parent:'INV00', title:'Items', icon:'fa fa-archive', excluded: true} },
       { name:'items_form', path: '/items_form/:item_id', component: () => import('pages/inventory/items_form'), meta:{type:'sub', parent:'INV00', title:'Items', icon:'fa fa-archive', excluded: true} },
       { name:'purchases', path: '/purchase', component: () => import('pages/inventory/purchase'), meta:{type:'sub', parent:'INV00', title:'Purchase', code:'INV02', icon:'fa fa-truck'} },
